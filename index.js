@@ -60,12 +60,14 @@ function mainMenu(pilihan) { // fungsi untuk mengatur pilihan menu
 function simpan() {
     console.log("Silahkan Masukkan Data ! : ");
     readline.question("Nama : ", (nama) => {
-        if (typeof nama === "string" && nama.trim() !== "") {
+        const isNamaValid = /^[a-zA-Z]+$/.test(nama);
+
+        if (isNamaValid) {
             objectKontak.nama = nama;
             console.log(`Input data berhasil ! : ${nama}`);
             ambilInputanNomor();
         } else {
-            console.log("Nama harus berupa string.");
+            console.log("Nama harus berupa string yang hanya berisi huruf.");
             simpan(); // Minta input lagi jika tidak valid
         }
     });
