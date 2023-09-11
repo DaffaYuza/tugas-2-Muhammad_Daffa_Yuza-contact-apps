@@ -67,7 +67,7 @@ function simpan() {
             console.log(`Input data berhasil ! : ${nama}`);
             ambilInputanNomor();
         } else {
-            console.log("Nama harus berupa string yang hanya berisi huruf.");
+            console.log("Nama harus berupa huruf.");
             simpan(); // Minta input lagi jika tidak valid
         }
     });
@@ -76,7 +76,7 @@ function simpan() {
 
 const ambilInputanNomor = () => {
     readline.question("Nomor : ", (nomor) => {
-        if (isValidNumber(nomor)) {
+        if (!isNaN(nomor) && nomor !== "") {
             const nomorHp = parseInt(nomor); // Ubah ke tipe data number
             if (isDuplicateNomor(nomorHp)) {
                 console.log("Nomor sudah ada dalam data.");
@@ -91,10 +91,6 @@ const ambilInputanNomor = () => {
             ambilInputanNomor(); // Minta input lagi jika tidak valid
         }
     });
-}
-
-function isValidNumber(input) {
-    return !isNaN(input) && !isNaN(parseFloat(input)); // Memeriksa apakah input adalah angka
 }
 
 function isDuplicateNomor(nomor) {
@@ -161,11 +157,10 @@ function hapusData() {
         } else {
             const namaDihapus = databaseKontak[indeksHapus].nama;
             databaseKontak.splice(indeksHapus, 1);
-            console.log(`Data dengan indeks '${indeksHapus}' dan nama '${namaDihapus}' telah dihapus.`);
+            console.log(`Data dengan indeks '${indeksHapus}' dengan nama '${namaDihapus}' telah dihapus.`);
         }
         kembali();
     });
 }
-
 
 viewMenu() // panggil fungsi view menu untuk pertama kali
